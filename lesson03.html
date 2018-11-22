@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>D3.js lesson 03</title>
+		<style>
+			#graph rect {
+				fill: #d00;
+			}
+
+		</style>
+	</head>
+	<body>
+		
+		<svg id="graph"></svg>
+		
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script>
+			"use strict";
+			
+			d3.select("#graph")
+				.append("rect")
+				.attr("x", 0)
+				.attr("y", 10)
+				.attr("width", 200)
+				.attr("height", 20);
+		</script>
+	</body>
+</html>
