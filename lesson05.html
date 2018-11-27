@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>D3.js lesson 05</title>
+		<style>
+			#graph rect {
+				fill: #d00;
+			}
+
+		</style>
+	</head>
+	<body>
+		
+		<svg id="graph"></svg>
+		<button id="update">更新</button>
+		
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script>
+			"use strict";
+			
+			var dataList1 = [300, 100, 50, 230, 25];
+			var dataList2 = [100, 134, 80, 23, 110];
+			
+			d3.select("#graph")
+				.selectAll("rect")
+				.data(dataList1)
+				.enter()
+				.append("rect")
+				.attr("x", 0)
+				.attr("y", function(d,i){
+					 return i * 25;
+				})
+				.attr("width", function(d,i){ return d; })
+				.attr("height", 20);
+				
+			d3.select("#update").on("click", function(){
+				d3.select("#graph")
+					.selectAll("rect")
+					.data(dataList2)
+					.attr("width", function(d,i){ return d; })
+			});
+		</script>
+	</body>
+</html>

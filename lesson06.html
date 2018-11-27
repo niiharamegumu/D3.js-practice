@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>D3.js lesson 06</title>
+		<style>
+			#graph rect {
+				fill: #d00;
+			}
+
+		</style>
+	</head>
+	<body>
+		
+		<svg id="graph"></svg>
+		<div id="button">
+			
+		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script>
+			"use strict";
+			
+			var dataList = [
+				[300, 100, 50, 230, 25],
+				[100, 134, 250, 23, 110],
+				[150, 34, 50, 230, 210]
+			];
+			var pref = ["北海道", "青森", "秋田"];
+			
+			for(var i = 0; i < dataList.length; i++) {
+				var elem = $("<button>").addClass("change").attr("data-num", i).text(pref[i]);
+				$("#button").append(elem);
+			}
+			// for ( var i = 0; i < dataList.length; i++ ) {
+			// 	$("<button>").clone().addClass("change").attr("data-num", i).text(pref[i]).appendTo($("#button"));
+			// }
+			
+			d3.select("#graph")
+				.selectAll("rect")
+				.data(dataList[0])
+				.enter()
+				.append("rect")
+				.attr("x", 0)
+				.attr("y", function(d,i){
+					 return i * 25;
+				})
+				.attr("width", 0)
+				.attr("height", 20)
+				.transition()
+				.delay(function(d,i){ return i * 300; })
+				.duration(500)
+				.attr("width", function( d,i ){ return d; })
+				
+			$(".change").on("click", function(){
+				graph_change( dataList[parseInt($(this).data("num"), 10)] );
+			});
+			
+			
+			function graph_change( dataType ){
+				d3.select("#graph")
+					.selectAll("rect")
+					.data( dataType )
+					.transition()
+					.attr("width", function(d,i){ return d; })
+			}
+			
+		</script>
+	</body>
+</html>
